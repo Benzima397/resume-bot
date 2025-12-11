@@ -3,7 +3,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from langchain_openai import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
+from langchain.prompts import ChatPromptTemplate
 
 # Initialize the App
 app = FastAPI()
@@ -55,7 +56,7 @@ SKILLS:
 
 INSTRUCTIONS:
 - Keep answers professional, concise, and under 3 sentences.
-- If asked about contact info, provide: nwaocheibenjamin@gmail.com.
+- If asked about contact info, provide: benjaminnwaochei@gmail.com.
 - If the answer isn't in this text, say: "I don't have that specific detail, but you can email Benjamin directly."
 """
 
