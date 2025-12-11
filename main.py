@@ -13,10 +13,14 @@ app = FastAPI()
 # In production, replace "*" with your actual domain (e.g., "https://nwaochei.tech")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://bencodes.tech"],
+    allow_origins=[
+        "https://bencodes.tech",
+        "https://www.bencodes.tech", # Just in case they use 'www'
+        "https://resume-bot-b5vs.onrender.com" # Allow the API itself for testing
+    ],
     allow_credentials=True,
-    allow_methods=["http://bencodes.tech"],
-    allow_headers=["http://bencodes.tech"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # DATA: Your Resume Context (Populated from your source files)
