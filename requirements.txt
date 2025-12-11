@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-langchain
-langchain-openai
+langchain-core  # For the new messaging/prompt classes
+langchain-groq  # The new API you are using
 python-dotenv
 pydantic
