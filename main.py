@@ -13,10 +13,10 @@ app = FastAPI()
 # In production, replace "*" with your actual domain (e.g., "https://nwaochei.tech")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://bencodes.tech"],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["http://bencodes.tech"],
+    allow_headers=["http://bencodes.tech"],
 )
 
 # DATA: Your Resume Context (Populated from your source files)
@@ -74,13 +74,13 @@ def home():
 @app.post("/ask")
 async def ask_resume(request: QueryRequest):
     try:
-        # Check for API Key
-        api_key = os.getenv("OPENAI_API_KEY")
+        # Check for API Key using the new name: GROQ_API_KEY
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
-            raise HTTPException(status_code=500, detail="OpenAI API Key not found")
-
+            # Update the error message to reflect the correct key name
+            raise HTTPException(status_code=500, detail="Groq API Key not found")
         # Initialize the Chat Model (GPT-4o-mini is cheap and fast)
-        chat = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, openai_api_key=api_key)
+        ChatGroq(model="mixtral-8x7b-32768", temperature=0)
 
         # Create the conversation
         messages = [
