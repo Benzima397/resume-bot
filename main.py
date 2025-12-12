@@ -23,7 +23,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-)
 
 # DATA: Your Resume Context (Populated from your source files)
 # This is what the AI "knows" about you.
