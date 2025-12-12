@@ -14,13 +14,15 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "http://bencodes.tech",
         "https://bencodes.tech",
-        "https://www.bencodes.tech", # Just in case they use 'www'
-        "https://resume-bot-b5vs.onrender.com" # Allow the API itself for testing
+        "http://www.bencodes.tech",
+        "https://www.bencodes.tech"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
 )
 
 # DATA: Your Resume Context (Populated from your source files)
