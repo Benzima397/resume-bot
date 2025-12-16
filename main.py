@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -18,6 +18,7 @@ app.add_middleware(
         "https://bencodes.tech",
         "http://www.bencodes.tech",
         "https://www.bencodes.tech"
+        "bencodes.tech"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -79,13 +80,14 @@ def home():
 @app.post("/ask")
 async def ask_resume(request: QueryRequest):
     try:
-        # Check for API Key using the new name: GROQ_API_KEY
-        api_key = os.getenv("GROQ_API_KEY")
+        
+        api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
             # Update the error message to reflect the correct key name
-            raise HTTPException(status_code=500, detail="Groq API Key not found")
+            raise HTTPException(status_code=500, detail="Google API Key not found")
         # Initialize the Chat Model (GPT-4o-mini is cheap and fast)
-        ChatGroq(model="mixtral-8x7b-32768", temperature=0)
+        chat = ChatGoogleGenerativeAI(model="gemini-3-Pro", temperature=0)
+        google_api_key=api_key
 
         # Create the conversation
         messages = [
